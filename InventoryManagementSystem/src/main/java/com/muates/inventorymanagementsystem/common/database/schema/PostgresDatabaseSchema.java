@@ -8,7 +8,7 @@ public class PostgresDatabaseSchema {
             + "phone_number VARCHAR(15) NOT NULL UNIQUE, "
             + "email_address VARCHAR(255) NOT NULL UNIQUE, "
             + "password VARCHAR(255) NOT NULL, "
-            + "photo BYTEA"
+            + "photo_url TEXT"
             + ");";
 
     public static final String SUPPLIER_TABLE = "CREATE TABLE IF NOT EXISTS supplier ("
@@ -17,7 +17,7 @@ public class PostgresDatabaseSchema {
             + "phone_number VARCHAR(15) NOT NULL UNIQUE, "
             + "email_address VARCHAR(255) NOT NULL UNIQUE, "
             + "password VARCHAR(255) NOT NULL, "
-            + "photo BYTEA"
+            + "photo_url TEXT"
             + ");";
 
     public static final String PRODUCT_TABLE = "CREATE TABLE IF NOT EXISTS product ("
@@ -26,6 +26,14 @@ public class PostgresDatabaseSchema {
             + "stock_quantity INT DEFAULT 0, "
             + "price DECIMAL(10, 2) NOT NULL, "
             + "discount DECIMAL(5, 2) DEFAULT 0.00"
+            + ");";
+
+    public static final String PRODUCT_PHOTO_TABLE = "CREATE TABLE IF NOT EXISTS product_photo ("
+            + "id SERIAL PRIMARY KEY, "
+            + "product_id INT NOT NULL, "
+            + "photo_url TEXT NOT NULL, "
+            + "is_primary BOOLEAN DEFAULT FALSE, "
+            + "FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE"
             + ");";
 
     public static final String BILL_TABLE = "CREATE TABLE IF NOT EXISTS bill ("
@@ -50,7 +58,8 @@ public class PostgresDatabaseSchema {
             + "FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE"
             + ");";
 
+
     public static String[] getTables() {
-        return new String[]{RETAILER_TABLE, SUPPLIER_TABLE, PRODUCT_TABLE, BILL_TABLE, BILL_DETAIL_TABLE};
+        return new String[]{RETAILER_TABLE, SUPPLIER_TABLE, PRODUCT_TABLE, PRODUCT_PHOTO_TABLE, BILL_TABLE, BILL_DETAIL_TABLE};
     }
 }
