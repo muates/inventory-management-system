@@ -2,6 +2,8 @@ package com.muates.inventorymanagementsystem.listener;
 
 import com.muates.inventorymanagementsystem.common.database.PostgresDatabaseConnection;
 import com.muates.inventorymanagementsystem.common.ioc.DependencyManager;
+import com.muates.inventorymanagementsystem.repository.*;
+import com.muates.inventorymanagementsystem.repository.impl.*;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -40,6 +42,13 @@ public class AppContextListener implements ServletContextListener {
             Connection postgresConnection = PostgresDatabaseConnection.getConnection();
 
             if (postgresConnection != null) {
+
+                container.register(SupplierRepository.class, new SupplierRepositoryImpl(postgresConnection));
+                container.register(RetailerRepository.class, new RetailerRepositoryImpl(postgresConnection));
+                container.register(ProductRepository.class, new ProductRepositoryImpl(postgresConnection));
+                container.register(ProductPhotoRepository.class, new ProductPhotoRepositoryImpl(postgresConnection));
+                container.register(BillRepository.class, new BillRepositoryImpl(postgresConnection));
+                container.register(BillDetailRepository.class, new BillDetailRepositoryImpl(postgresConnection));
 
             } else {
                 throw new RuntimeException("Postgres connection is null");
