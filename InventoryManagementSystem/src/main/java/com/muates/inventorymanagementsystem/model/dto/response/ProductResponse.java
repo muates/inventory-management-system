@@ -8,6 +8,17 @@ public class ProductResponse {
     private Double price;
     private Double discount;
 
+    public ProductResponse() {
+    }
+
+    public ProductResponse(Integer id, String name, Integer stockQuantity, Double price, Double discount) {
+        this.id = id;
+        this.name = name;
+        this.stockQuantity = stockQuantity;
+        this.price = price;
+        this.discount = discount;
+    }
+
     public Integer getId() {
         return id;
     }

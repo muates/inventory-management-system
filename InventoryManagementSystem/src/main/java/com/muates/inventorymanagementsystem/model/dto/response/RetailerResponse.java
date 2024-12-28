@@ -8,6 +8,17 @@ public class RetailerResponse {
     private String emailAddress;
     private String photoUrl;
 
+    public RetailerResponse() {
+    }
+
+    public RetailerResponse(Integer id, String name, String phoneNumber, String emailAddress, String photoUrl) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.photoUrl = photoUrl;
+    }
+
     public Integer getId() {
         return id;
     }
