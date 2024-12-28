@@ -36,11 +36,13 @@ public class PostgresDatabaseSchema {
             + "FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE"
             + ");";
 
+    public static final String BILL_STATUS_ENUM = "CREATE TYPE bill_status AS ENUM ('pending', 'approved', 'completed', 'rejected');";
+
     public static final String BILL_TABLE = "CREATE TABLE IF NOT EXISTS bill ("
             + "id SERIAL PRIMARY KEY, "
             + "supplier_id INT NOT NULL, "
             + "retailer_id INT NOT NULL, "
-            + "status VARCHAR(50) DEFAULT 'pending', "
+            + "status bill_status DEFAULT 'pending', "
             + "total_amount DECIMAL(15, 2) DEFAULT 0.00, "
             + "date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
             + "FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON DELETE CASCADE, "
@@ -60,6 +62,6 @@ public class PostgresDatabaseSchema {
 
 
     public static String[] getTables() {
-        return new String[]{RETAILER_TABLE, SUPPLIER_TABLE, PRODUCT_TABLE, PRODUCT_PHOTO_TABLE, BILL_TABLE, BILL_DETAIL_TABLE};
+        return new String[]{RETAILER_TABLE, SUPPLIER_TABLE, PRODUCT_TABLE, PRODUCT_PHOTO_TABLE, BILL_STATUS_ENUM, BILL_TABLE, BILL_DETAIL_TABLE};
     }
 }
