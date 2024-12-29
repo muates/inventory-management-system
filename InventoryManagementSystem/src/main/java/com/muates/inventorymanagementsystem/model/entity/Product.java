@@ -9,21 +9,24 @@ public class Product {
     private Integer stockQuantity;
     private Double price;
     private Double discount;
+    private Integer supplierId;
 
     public Product() {
     }
 
-    public Product(String name, Integer stockQuantity, Double price) {
+    public Product(String name, Integer stockQuantity, Double price, Integer supplierId) {
         this.name = name;
         this.stockQuantity = stockQuantity;
         this.price = price;
+        this.supplierId = supplierId;
     }
 
-    public Product(String name, Integer stockQuantity, Double price, Double discount) {
+    public Product(String name, Integer stockQuantity, Double price, Double discount, Integer supplierId) {
         this.name = name;
         this.stockQuantity = stockQuantity;
         this.price = price;
         this.discount = discount;
+        this.supplierId = supplierId;
     }
 
     public Integer getId() {
@@ -66,6 +69,10 @@ public class Product {
         this.discount = discount;
     }
 
+    public Integer getSupplierId() {
+        return supplierId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,12 +82,13 @@ public class Product {
                 && Objects.equals(name, product.name)
                 && Objects.equals(stockQuantity, product.stockQuantity)
                 && Objects.equals(price, product.price)
-                && Objects.equals(discount, product.discount);
+                && Objects.equals(discount, product.discount)
+                && Objects.equals(supplierId, product.supplierId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, stockQuantity, price, discount);
+        return Objects.hash(id, name, stockQuantity, price, discount, supplierId);
     }
 
     @Override
@@ -91,6 +99,7 @@ public class Product {
                 ", stockQuantity=" + stockQuantity +
                 ", price=" + price +
                 ", discount=" + discount +
+                ", supplierId=" + supplierId +
                 '}';
     }
 }

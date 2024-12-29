@@ -16,7 +16,8 @@ public class ProductConverter {
                 request.getName(),
                 request.getStockQuantity(),
                 request.getPrice(),
-                request.getDiscount()
+                request.getDiscount(),
+                request.getSupplierId()
         );
     }
 
@@ -31,7 +32,8 @@ public class ProductConverter {
                 entity.getName(),
                 entity.getStockQuantity(),
                 entity.getPrice(),
-                entity.getDiscount()
+                entity.getDiscount(),
+                entity.getSupplierId()
         );
     }
 }

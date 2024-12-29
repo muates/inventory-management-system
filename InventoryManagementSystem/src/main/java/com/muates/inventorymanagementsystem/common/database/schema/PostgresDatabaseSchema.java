@@ -25,7 +25,9 @@ public class PostgresDatabaseSchema {
             + "name VARCHAR(255) NOT NULL, "
             + "stock_quantity INT DEFAULT 0, "
             + "price DECIMAL(10, 2) NOT NULL, "
-            + "discount DECIMAL(5, 2) DEFAULT 0.00"
+            + "discount DECIMAL(5, 2) DEFAULT 0.00, "
+            + "supplier_id INT NOT NULL, "
+            + "FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON DELETE CASCADE"
             + ");";
 
     public static final String PRODUCT_PHOTO_TABLE = "CREATE TABLE IF NOT EXISTS product_photo ("
