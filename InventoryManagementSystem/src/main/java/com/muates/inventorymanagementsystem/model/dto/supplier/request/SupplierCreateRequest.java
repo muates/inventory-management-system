@@ -1,6 +1,6 @@
-package com.muates.inventorymanagementsystem.model.dto.request;
+package com.muates.inventorymanagementsystem.model.dto.supplier.request;
 
-public class RetailerCreateRequest {
+public class SupplierCreateRequest {
 
     private String name;
     private String phoneNumber;

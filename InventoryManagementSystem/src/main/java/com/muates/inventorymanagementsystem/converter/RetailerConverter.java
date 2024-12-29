@@ -1,7 +1,7 @@
 package com.muates.inventorymanagementsystem.converter;
 
-import com.muates.inventorymanagementsystem.model.dto.request.RetailerCreateRequest;
-import com.muates.inventorymanagementsystem.model.dto.response.RetailerResponse;
+import com.muates.inventorymanagementsystem.model.dto.retailer.request.RetailerCreateRequest;
+import com.muates.inventorymanagementsystem.model.dto.retailer.response.RetailerResponse;
 import com.muates.inventorymanagementsystem.model.entity.Retailer;
 
 public class RetailerConverter {

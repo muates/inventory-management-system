@@ -1,7 +1,7 @@
 package com.muates.inventorymanagementsystem.converter;
 
-import com.muates.inventorymanagementsystem.model.dto.request.SupplierCreateRequest;
-import com.muates.inventorymanagementsystem.model.dto.response.SupplierResponse;
+import com.muates.inventorymanagementsystem.model.dto.supplier.request.SupplierCreateRequest;
+import com.muates.inventorymanagementsystem.model.dto.supplier.response.SupplierResponse;
 import com.muates.inventorymanagementsystem.model.entity.Supplier;
 
 public class SupplierConverter {

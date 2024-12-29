@@ -1,4 +1,4 @@
-package com.muates.inventorymanagementsystem.model.dto.request;
+package com.muates.inventorymanagementsystem.model.dto.product.request;
 
 public class ProductCreateRequest {
 

@@ -1,4 +1,4 @@
-package com.muates.inventorymanagementsystem.model.dto.response;
+package com.muates.inventorymanagementsystem.model.dto.bill.response;
 
 import com.muates.inventorymanagementsystem.model.enums.BillStatus;
 

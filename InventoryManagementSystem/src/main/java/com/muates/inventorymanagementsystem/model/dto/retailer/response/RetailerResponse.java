@@ -1,12 +1,31 @@
-package com.muates.inventorymanagementsystem.model.dto.request;
+package com.muates.inventorymanagementsystem.model.dto.retailer.response;
 
-public class SupplierCreateRequest {
+public class RetailerResponse {
 
+    private Integer id;
     private String name;
     private String phoneNumber;
     private String emailAddress;
-    private String password;
     private String photoUrl;
+
+    public RetailerResponse() {
+    }
+
+    public RetailerResponse(Integer id, String name, String phoneNumber, String emailAddress, String photoUrl) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.photoUrl = photoUrl;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -30,14 +49,6 @@ public class SupplierCreateRequest {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhotoUrl() {

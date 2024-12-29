@@ -1,4 +1,4 @@
-package com.muates.inventorymanagementsystem.model.dto.response;
+package com.muates.inventorymanagementsystem.model.dto.product.response;
 
 public class ProductResponse {
 

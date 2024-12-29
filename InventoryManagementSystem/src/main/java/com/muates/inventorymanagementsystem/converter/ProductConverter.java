@@ -1,7 +1,7 @@
 package com.muates.inventorymanagementsystem.converter;
 
-import com.muates.inventorymanagementsystem.model.dto.request.ProductCreateRequest;
-import com.muates.inventorymanagementsystem.model.dto.response.ProductResponse;
+import com.muates.inventorymanagementsystem.model.dto.product.request.ProductCreateRequest;
+import com.muates.inventorymanagementsystem.model.dto.product.response.ProductResponse;
 import com.muates.inventorymanagementsystem.model.entity.Product;
 
 public class ProductConverter {
