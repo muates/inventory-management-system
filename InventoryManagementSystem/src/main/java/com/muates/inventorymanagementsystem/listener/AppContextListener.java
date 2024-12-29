@@ -4,6 +4,11 @@ import com.muates.inventorymanagementsystem.common.database.PostgresDatabaseConn
 import com.muates.inventorymanagementsystem.common.ioc.DependencyManager;
 import com.muates.inventorymanagementsystem.repository.*;
 import com.muates.inventorymanagementsystem.repository.impl.*;
+import com.muates.inventorymanagementsystem.service.auth.AuthService;
+import com.muates.inventorymanagementsystem.service.auth.impl.AuthServiceImpl;
+import com.muates.inventorymanagementsystem.service.auth.strategy.AuthStrategy;
+import com.muates.inventorymanagementsystem.service.auth.strategy.impl.RetailerAuthStrategy;
+import com.muates.inventorymanagementsystem.service.auth.strategy.impl.SupplierAuthStrategy;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -31,6 +36,10 @@ public class AppContextListener implements ServletContextListener {
 
     private void registerServices(DependencyManager container) {
         try {
+            // Auth
+            container.register(AuthService.class, new AuthServiceImpl());
+            container.register(AuthStrategy.class, "supplier", new SupplierAuthStrategy());
+            container.register(AuthStrategy.class, "retailer", new RetailerAuthStrategy());
 
         } catch (Exception e) {
             throw new RuntimeException(e);
