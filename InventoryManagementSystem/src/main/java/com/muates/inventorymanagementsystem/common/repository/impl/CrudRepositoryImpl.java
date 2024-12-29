@@ -91,12 +91,16 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
                     columnNames.append(", ");
                     placeholders.append(", ");
                 }
-                columnNames.append(field.getName());
+                columnNames.append(toSnakeCase(field.getName()));
                 placeholders.append("?");
             }
         }
 
         return "INSERT INTO " + clazz.getSimpleName() + " (" + columnNames + ") VALUES (" + placeholders + ")";
+    }
+
+    private String toSnakeCase(String camelCase) {
+        return camelCase.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase();
     }
 
     private String buildUpdateQuery(TEntity entity) {
@@ -129,8 +133,6 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
             }
         }
     }
-
-
 
     private Object getIdValue(TEntity entity) throws IllegalAccessException {
         Field[] fields = getEntityClass().getDeclaredFields();
