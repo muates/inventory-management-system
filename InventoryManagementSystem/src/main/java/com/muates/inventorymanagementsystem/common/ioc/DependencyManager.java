@@ -7,7 +7,7 @@ import java.util.Map;
 public class DependencyManager {
 
     private static DependencyManager instance;
-    private final Map<Class<?>, Object> container = new HashMap<>();
+    private final Map<String, Object> container = new HashMap<>();
 
     public static DependencyManager getContainer() {
         if (instance == null) {
@@ -17,11 +17,19 @@ public class DependencyManager {
     }
 
     public <T> void register(Class<T> interfaceType, T implementation) {
-        container.put(interfaceType, implementation);
+        container.put(interfaceType.getName(), implementation);
+    }
+
+    public void register(Class<?> interfaceType, String key, Object implementation) {
+        container.put(key + interfaceType.getName(), implementation);
     }
 
     public <T> T resolve(Class<T> interfaceType) {
-        return (T) container.get(interfaceType);
+        return (T) container.get(interfaceType.getName());
+    }
+
+    public <T> T resolve(Class<T> interfaceType, String key) {
+        return (T) container.get(key + interfaceType.getName());
     }
 
     public void injectDependencies(Object target) {
