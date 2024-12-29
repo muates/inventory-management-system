@@ -11,7 +11,7 @@ import com.muates.inventorymanagementsystem.service.auth.strategy.AuthStrategy;
 public class AuthServiceImpl implements AuthService {
 
     @Override
-    public void register(Object request, boolean isSupplier) {
+    public void register(Object request) {
         AuthStrategy authStrategy;
 
         if (request instanceof SupplierCreateRequest) {
@@ -28,9 +28,8 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
-    public boolean login(LoginRequest loginRequest) {
+    public boolean login(LoginRequest loginRequest, boolean isSupplier) {
         AuthStrategy authStrategy;
-        boolean isSupplier = loginRequest.isSupplier();
 
         if (isSupplier) {
             authStrategy = DependencyManager.getContainer().resolve(AuthStrategy.class, "supplier");
@@ -39,7 +38,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         AuthContext authContext = AuthContext.getInstance(authStrategy);
-        return authContext.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
+        return authContext.authenticate(loginRequest.getEmailAddress(), loginRequest.getPassword());
     }
 
 }

@@ -2,25 +2,23 @@ package com.muates.inventorymanagementsystem.model.dto.auth.request;
 
 public class LoginRequest {
 
-    private String email;
+    private String emailAddress;
     private String password;
-    private boolean isSupplier;
 
     public LoginRequest() {
     }
 
-    public LoginRequest(String email, String password, boolean isSupplier) {
-        this.email = email;
+    public LoginRequest(String email, String password) {
+        this.emailAddress = email;
         this.password = password;
-        this.isSupplier = isSupplier;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public String getPassword() {
@@ -29,13 +27,5 @@ public class LoginRequest {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isSupplier() {
-        return isSupplier;
-    }
-
-    public void setSupplier(boolean supplier) {
-        isSupplier = supplier;
     }
 }

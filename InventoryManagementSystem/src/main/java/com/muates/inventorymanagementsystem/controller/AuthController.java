@@ -35,26 +35,26 @@ public class AuthController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        boolean isSupplier = Boolean.parseBoolean(req.getParameter("isSupplier"));
 
         if ("register".equals(action)) {
-            boolean isSupplier = Boolean.parseBoolean(req.getParameter("isSupplier"));
             if (isSupplier) {
                 SupplierCreateRequest supplierCreateRequest =
                         RequestMapper.toRequest(req, SupplierCreateRequest.class, RequestParams.SUPPLIER_CREATE_REQUEST_PARAMS);
 
-                authService.register(supplierCreateRequest, true);
+                authService.register(supplierCreateRequest);
                 resp.getWriter().write("Supplier registration successful");
             } else {
                 RetailerCreateRequest retailerCreateRequest =
                         RequestMapper.toRequest(req, RetailerCreateRequest.class, RequestParams.RETAILER_CREATE_REQUEST_PARAMS);
 
-                authService.register(retailerCreateRequest, false);
+                authService.register(retailerCreateRequest);
                 resp.getWriter().write("Retailer registration successful");
             }
         } else if ("login".equals(action)) {
             LoginRequest loginRequest = RequestMapper.toRequest(req, LoginRequest.class, RequestParams.AUTH_LOGIN_REQUEST);
 
-            if (authService.login(loginRequest)) {
+            if (authService.login(loginRequest, isSupplier)) {
                 resp.getWriter().write("Login successful");
             } else {
                 resp.getWriter().write("Invalid login credentials");
