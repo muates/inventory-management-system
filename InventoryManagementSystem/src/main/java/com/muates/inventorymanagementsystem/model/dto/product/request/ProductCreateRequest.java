@@ -1,11 +1,13 @@
 package com.muates.inventorymanagementsystem.model.dto.product.request;
 
+import java.math.BigDecimal;
+
 public class ProductCreateRequest {
 
     private String name;
     private Integer stockQuantity;
-    private Double price;
-    private Double discount;
+    private BigDecimal price;
+    private BigDecimal discount;
     private Integer supplierId;
 
     public String getName() {
@@ -24,19 +26,19 @@ public class ProductCreateRequest {
         this.stockQuantity = stockQuantity;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Double getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
 

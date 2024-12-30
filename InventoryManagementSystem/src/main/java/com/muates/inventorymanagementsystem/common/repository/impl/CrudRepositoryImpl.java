@@ -23,7 +23,7 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
         Class<?> clazz = entity.getClass();
         String query = buildInsertQuery(entity, clazz);
         try (PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            setPreparedStatementParams(stmt, entity);
+            setPreparedStatementSaveParams(stmt, entity);
             stmt.executeUpdate();
 
             ResultSet generatedKeys = stmt.getGeneratedKeys();
@@ -53,7 +53,7 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
 
     @Override
     public List<TEntity> findAll() {
-        String query = "SELECT * FROM " + getEntityClass().getSimpleName();
+        String query = "SELECT * FROM " + getEntityClass().getSimpleName() + " ORDER BY id";
         return executeQuery(query);
     }
 
@@ -61,8 +61,8 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
     public void update(TEntity entity) {
         String query = buildUpdateQuery(entity);
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            setPreparedStatementParams(stmt, entity);
-            stmt.setObject(getFieldCount(entity) + 1, getIdValue(entity));
+            setPreparedStatementUpdateParams(stmt, entity);
+
             stmt.executeUpdate();
         } catch (SQLException | IllegalAccessException e) {
             e.printStackTrace();
@@ -99,10 +99,6 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
         return "INSERT INTO " + clazz.getSimpleName() + " (" + columnNames + ") VALUES (" + placeholders + ")";
     }
 
-    private String toSnakeCase(String camelCase) {
-        return camelCase.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase();
-    }
-
     private String buildUpdateQuery(TEntity entity) {
         Class<?> clazz = getEntityClass();
         Field[] fields = clazz.getDeclaredFields();
@@ -110,15 +106,17 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
 
         for (Field field : fields) {
             if (!field.getName().equalsIgnoreCase("id")) {
-                updateFields.append(field.getName()).append(" = ?, ");
+                String columnName = toSnakeCase(field.getName());
+                updateFields.append(columnName).append(" = ?, ");
             }
         }
 
-        updateFields.setLength(updateFields.length() - 2);
+        updateFields.setLength(updateFields.length() - 2); // Remove the last comma
         return "UPDATE " + clazz.getSimpleName() + " SET " + updateFields + " WHERE id = ?";
     }
 
-    private void setPreparedStatementParams(PreparedStatement stmt, TEntity entity) throws SQLException, IllegalAccessException {
+
+    private void setPreparedStatementSaveParams(PreparedStatement stmt, TEntity entity) throws SQLException, IllegalAccessException {
         Field[] fields = getEntityClass().getDeclaredFields();
         int index = 1;
         for (Field field : fields) {
@@ -132,6 +130,25 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
                 }
             }
         }
+    }
+
+    private void setPreparedStatementUpdateParams(PreparedStatement stmt, TEntity entity) throws SQLException, IllegalAccessException {
+        Field[] fields = getEntityClass().getDeclaredFields();
+        int index = 1;
+
+        for (Field field : fields) {
+            field.setAccessible(true);
+            if (!field.getName().equalsIgnoreCase("id")) {
+                Object value = field.get(entity);
+                if (value == null) {
+                    stmt.setObject(index++, null);
+                } else {
+                    stmt.setObject(index++, value);
+                }
+            }
+        }
+
+        stmt.setObject(index, getIdValue(entity));
     }
 
     private Object getIdValue(TEntity entity) throws IllegalAccessException {
@@ -170,6 +187,10 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
             e.printStackTrace();
         }
         return resultList;
+    }
+
+    private String toSnakeCase(String camelCase) {
+        return camelCase.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase();
     }
 
     protected Class<TEntity> getEntityClass() {

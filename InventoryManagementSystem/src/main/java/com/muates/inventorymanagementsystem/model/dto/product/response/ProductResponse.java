@@ -1,18 +1,20 @@
 package com.muates.inventorymanagementsystem.model.dto.product.response;
 
+import java.math.BigDecimal;
+
 public class ProductResponse {
 
     private Integer id;
     private String name;
     private Integer stockQuantity;
-    private Double price;
-    private Double discount;
+    private BigDecimal price;
+    private BigDecimal discount;
     private Integer supplierId;
 
     public ProductResponse() {
     }
 
-    public ProductResponse(Integer id, String name, Integer stockQuantity, Double price, Double discount, Integer supplierId) {
+    public ProductResponse(Integer id, String name, Integer stockQuantity, BigDecimal price, BigDecimal discount, Integer supplierId) {
         this.id = id;
         this.name = name;
         this.stockQuantity = stockQuantity;
@@ -45,19 +47,19 @@ public class ProductResponse {
         this.stockQuantity = stockQuantity;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Double getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
 

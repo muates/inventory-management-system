@@ -10,9 +10,7 @@ public class DynamicRowMapper {
     public static <TEntity> TEntity mapRow(ResultSet resultSet, Class<TEntity> entityClass) throws SQLException {
         try {
             TEntity entity = createEntityInstance(entityClass);
-
             mapFieldsToColumns(resultSet, entity);
-
             return entity;
         } catch (NoSuchMethodException e) {
             throw new SQLException("No default constructor found for entity class: " + entityClass.getName(), e);
@@ -30,7 +28,7 @@ public class DynamicRowMapper {
     private static <TEntity> void mapFieldsToColumns(ResultSet resultSet, TEntity entity) throws SQLException {
         for (Field field : entity.getClass().getDeclaredFields()) {
             field.setAccessible(true);
-            String columnName = field.getName();
+            String columnName = getColumnName(field);
 
             try {
                 Object value = resultSet.getObject(columnName);
@@ -41,5 +39,21 @@ public class DynamicRowMapper {
                 throw new SQLException("Error setting field value for field: " + columnName, e);
             }
         }
+    }
+
+    private static String getColumnName(Field field) {
+        String fieldName = field.getName();
+        StringBuilder columnName = new StringBuilder();
+
+        for (char c : fieldName.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                columnName.append("_");
+                columnName.append(Character.toLowerCase(c));
+            } else {
+                columnName.append(c);
+            }
+        }
+
+        return columnName.toString();
     }
 }
