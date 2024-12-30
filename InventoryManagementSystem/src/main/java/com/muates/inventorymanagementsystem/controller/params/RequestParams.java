@@ -1,4 +1,4 @@
-package com.muates.inventorymanagementsystem.util.servlet;
+package com.muates.inventorymanagementsystem.controller.params;
 
 public class RequestParams {
     public static final String[] RETAILER_CREATE_REQUEST_PARAMS = {"name", "phoneNumber", "emailAddress", "password", "photoUrl"};

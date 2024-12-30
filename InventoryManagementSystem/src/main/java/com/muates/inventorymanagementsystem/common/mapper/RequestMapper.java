@@ -1,4 +1,4 @@
-package com.muates.inventorymanagementsystem.util.servlet;
+package com.muates.inventorymanagementsystem.common.mapper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;

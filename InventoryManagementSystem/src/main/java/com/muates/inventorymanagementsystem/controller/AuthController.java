@@ -6,8 +6,8 @@ import com.muates.inventorymanagementsystem.model.dto.auth.request.LoginRequest;
 import com.muates.inventorymanagementsystem.model.dto.retailer.request.RetailerCreateRequest;
 import com.muates.inventorymanagementsystem.model.dto.supplier.request.SupplierCreateRequest;
 import com.muates.inventorymanagementsystem.service.auth.AuthService;
-import com.muates.inventorymanagementsystem.util.servlet.RequestMapper;
-import com.muates.inventorymanagementsystem.util.servlet.RequestParams;
+import com.muates.inventorymanagementsystem.common.mapper.RequestMapper;
+import com.muates.inventorymanagementsystem.controller.params.RequestParams;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
