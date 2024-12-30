@@ -20,7 +20,7 @@ public class RetailerRepositoryImpl extends BaseRepositoryImpl<Retailer, Integer
 
     @Override
     public Retailer findByEmailAddress(String emailAddress) {
-        String query = "SELECT * FROM supplier WHERE email_address = ?";
+        String query = "SELECT * FROM retailer WHERE email_address = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, emailAddress);
