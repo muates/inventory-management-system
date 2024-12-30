@@ -9,6 +9,8 @@ import com.muates.inventorymanagementsystem.service.auth.impl.AuthServiceImpl;
 import com.muates.inventorymanagementsystem.service.auth.strategy.AuthStrategy;
 import com.muates.inventorymanagementsystem.service.auth.strategy.impl.RetailerAuthStrategy;
 import com.muates.inventorymanagementsystem.service.auth.strategy.impl.SupplierAuthStrategy;
+import com.muates.inventorymanagementsystem.service.product.ProductService;
+import com.muates.inventorymanagementsystem.service.product.impl.ProductServiceImpl;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -40,6 +42,8 @@ public class AppContextListener implements ServletContextListener {
             container.register(AuthService.class, new AuthServiceImpl());
             container.register(AuthStrategy.class, "supplier", new SupplierAuthStrategy());
             container.register(AuthStrategy.class, "retailer", new RetailerAuthStrategy());
+
+            container.register(ProductService.class, new ProductServiceImpl());
 
         } catch (Exception e) {
             throw new RuntimeException(e);
