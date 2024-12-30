@@ -1,5 +1,6 @@
 package com.muates.inventorymanagementsystem.model.entity;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Product {
@@ -7,21 +8,21 @@ public class Product {
     private Integer id;
     private String name;
     private Integer stockQuantity;
-    private Double price;
-    private Double discount;
+    private BigDecimal price;
+    private BigDecimal discount;
     private Integer supplierId;
 
     public Product() {
     }
 
-    public Product(String name, Integer stockQuantity, Double price, Integer supplierId) {
+    public Product(String name, Integer stockQuantity, BigDecimal price, Integer supplierId) {
         this.name = name;
         this.stockQuantity = stockQuantity;
         this.price = price;
         this.supplierId = supplierId;
     }
 
-    public Product(String name, Integer stockQuantity, Double price, Double discount, Integer supplierId) {
+    public Product(String name, Integer stockQuantity, BigDecimal price, BigDecimal discount, Integer supplierId) {
         this.name = name;
         this.stockQuantity = stockQuantity;
         this.price = price;
@@ -53,24 +54,28 @@ public class Product {
         this.stockQuantity = stockQuantity;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Double getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
 
     public Integer getSupplierId() {
         return supplierId;
+    }
+
+    public void setSupplierId(Integer supplierId) {
+        this.supplierId = supplierId;
     }
 
     @Override
