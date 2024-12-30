@@ -4,6 +4,9 @@ import com.muates.inventorymanagementsystem.model.dto.product.request.ProductCre
 import com.muates.inventorymanagementsystem.model.dto.product.response.ProductResponse;
 import com.muates.inventorymanagementsystem.model.entity.Product;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ProductConverter {
 
     public static Product toEntity(ProductCreateRequest request) {
@@ -35,5 +38,9 @@ public class ProductConverter {
                 entity.getDiscount(),
                 entity.getSupplierId()
         );
+    }
+
+    public static List<ProductResponse> toDto(List<Product> entities) {
+        return entities.stream().map(ProductConverter::toDto).collect(Collectors.toList());
     }
 }
