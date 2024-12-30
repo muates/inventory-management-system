@@ -55,7 +55,11 @@ public class AuthController extends HttpServlet {
             LoginRequest loginRequest = RequestMapper.toRequest(req, LoginRequest.class, RequestParams.AUTH_LOGIN_REQUEST);
 
             if (authService.login(loginRequest, isSupplier)) {
-                resp.getWriter().write("Login successful");
+                if (isSupplier) {
+                    resp.sendRedirect("/views/supplier/supplier.jsp");
+                } else {
+                    resp.sendRedirect("/views/retailer/retailer.jsp");
+                }
             } else {
                 resp.getWriter().write("Invalid login credentials");
             }
