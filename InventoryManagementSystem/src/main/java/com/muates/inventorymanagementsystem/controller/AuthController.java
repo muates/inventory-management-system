@@ -8,6 +8,7 @@ import com.muates.inventorymanagementsystem.model.dto.supplier.request.SupplierC
 import com.muates.inventorymanagementsystem.service.auth.AuthService;
 import com.muates.inventorymanagementsystem.common.mapper.RequestMapper;
 import com.muates.inventorymanagementsystem.controller.params.RequestParams;
+import com.muates.inventorymanagementsystem.session.SessionManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -54,9 +55,14 @@ public class AuthController extends HttpServlet {
         } else if ("login".equals(action)) {
             LoginRequest loginRequest = RequestMapper.toRequest(req, LoginRequest.class, RequestParams.AUTH_LOGIN_REQUEST);
 
-            if (authService.login(loginRequest, isSupplier)) {
+            Integer userId = authService.login(loginRequest, isSupplier);
+
+            if (userId != null) {
+
+                SessionManager.createSession(req, userId, isSupplier);
+
                 if (isSupplier) {
-                    resp.sendRedirect("/views/supplier/supplier.jsp");
+                    resp.sendRedirect("/supplier");
                 } else {
                     resp.sendRedirect("/views/retailer/retailer.jsp");
                 }
