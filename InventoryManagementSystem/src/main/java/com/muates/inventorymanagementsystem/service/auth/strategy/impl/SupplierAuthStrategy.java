@@ -14,9 +14,12 @@ public class SupplierAuthStrategy implements AuthStrategy {
     private SupplierRepository supplierRepository;
 
     @Override
-    public boolean authenticate(String email, String password) {
+    public Integer authenticate(String email, String password) {
         Supplier supplier = supplierRepository.findByEmailAddress(email);
-        return supplier != null && PasswordHelper.checkPassword(password, supplier.getPassword());
+        if (supplier != null && PasswordHelper.checkPassword(password, supplier.getPassword())) {
+            return supplier.getId();
+        }
+        return null;
     }
 
     @Override

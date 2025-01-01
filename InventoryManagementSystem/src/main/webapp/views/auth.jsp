@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration and Login</title>
     <!-- Link to CSS -->
-    <link href="../assets/css/auth.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/assets/css/auth.css" rel="stylesheet">
     <!-- Bootstrap CDN -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -104,7 +104,7 @@
 </div>
 
 <!-- Link to JS -->
-<script src="../assets/js/auth.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/auth.js"></script>
 <!-- Bootstrap JS and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

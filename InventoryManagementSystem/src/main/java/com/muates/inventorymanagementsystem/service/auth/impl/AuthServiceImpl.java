@@ -28,7 +28,7 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
-    public boolean login(LoginRequest loginRequest, boolean isSupplier) {
+    public Integer login(LoginRequest loginRequest, boolean isSupplier) {
         AuthStrategy authStrategy;
 
         if (isSupplier) {

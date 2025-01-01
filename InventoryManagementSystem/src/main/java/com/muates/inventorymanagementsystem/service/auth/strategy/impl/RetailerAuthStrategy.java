@@ -14,9 +14,13 @@ public class RetailerAuthStrategy implements AuthStrategy {
     private RetailerRepository retailerRepository;
 
     @Override
-    public boolean authenticate(String email, String password) {
+    public Integer authenticate(String email, String password) {
         Retailer retailer = retailerRepository.findByEmailAddress(email);
-        return retailer != null && PasswordHelper.checkPassword(password, retailer.getPassword());
+        if (retailer != null && PasswordHelper.checkPassword(password, retailer.getPassword())) {
+            return retailer.getId();
+        }
+
+        return null;
     }
 
     @Override

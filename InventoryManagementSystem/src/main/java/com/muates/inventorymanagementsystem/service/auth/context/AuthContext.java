@@ -20,7 +20,7 @@ public class AuthContext {
         return instance;
     }
 
-    public boolean authenticate(String email, String password) {
+    public Integer authenticate(String email, String password) {
         return authStrategy.authenticate(email, password);
     }
 
