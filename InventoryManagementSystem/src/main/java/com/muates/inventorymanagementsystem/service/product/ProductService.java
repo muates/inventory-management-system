@@ -10,6 +10,7 @@ public interface ProductService {
     ProductResponse save(ProductCreateRequest request);
     ProductResponse findById(Integer id);
     List<ProductResponse> findAll();
+    List<ProductResponse> findAllBySupplierId(Integer supplierId);
     void update(Integer id, ProductUpdateRequest request);
     void deleteById(Integer id);
 }

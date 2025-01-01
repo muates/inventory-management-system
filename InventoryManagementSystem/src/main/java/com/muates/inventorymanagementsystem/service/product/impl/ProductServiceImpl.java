@@ -45,6 +45,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductResponse> findAllBySupplierId(Integer supplierId) {
+        return ProductConverter.toDto(productRepository.findAllBySupplierId(supplierId));
+    }
+
+    @Override
     public void update(Integer id, ProductUpdateRequest request) {
         Product product = productRepository.findById(id);
 
