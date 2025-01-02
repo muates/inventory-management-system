@@ -13,4 +13,6 @@ public interface CrudRepository<TEntity, TID> {
     void update(TEntity entity);
 
     void delete(TID id);
+
+    List<TEntity> saveAll(List<TEntity> entities);
 }

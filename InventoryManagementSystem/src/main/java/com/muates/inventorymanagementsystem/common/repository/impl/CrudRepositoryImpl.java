@@ -80,6 +80,35 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
         }
     }
 
+    @Override
+    public List<TEntity> saveAll(List<TEntity> entities) {
+        List<TEntity> savedEntities = new ArrayList<>();
+        String query = buildInsertQuery(entities.get(0), getEntityClass());
+
+        try (PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            for (TEntity entity : entities) {
+                setPreparedStatementSaveParams(stmt, entity);
+                stmt.addBatch();
+            }
+
+            stmt.executeBatch();
+
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            for (TEntity entity : entities) {
+                if (generatedKeys.next()) {
+                    setId(entity, generatedKeys.getObject(1));
+                }
+            }
+
+            savedEntities.addAll(entities);
+
+        } catch (SQLException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return savedEntities;
+    }
+
     private String buildInsertQuery(TEntity entity, Class<?> clazz) {
         Field[] fields = clazz.getDeclaredFields();
         StringBuilder columnNames = new StringBuilder();

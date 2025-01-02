@@ -37,4 +37,9 @@ public class BaseRepositoryImpl<TEntity, TID> implements BaseRepository<TEntity,
     public void delete(TID id) {
         crudRepository.delete(id);
     }
+
+    @Override
+    public List<TEntity> saveAll(List<TEntity> entities) {
+        return crudRepository.saveAll(entities);
+    }
 }
