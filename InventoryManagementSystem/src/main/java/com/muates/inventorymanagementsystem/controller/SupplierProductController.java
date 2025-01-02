@@ -43,7 +43,7 @@ public class SupplierProductController extends HttpServlet {
             request.setAttribute("productList", productList);
             request.getRequestDispatcher("/views/supplier/product/list-products.jsp").forward(request, response);
         }
-        else if ("edit".equals(action)) {
+        else if ("edit-product".equals(action)) {
             String productIdStr = request.getParameter("id");
             if (productIdStr != null) {
                 Integer productId = Integer.valueOf(productIdStr);
