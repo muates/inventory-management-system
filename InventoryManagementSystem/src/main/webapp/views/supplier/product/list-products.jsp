@@ -36,7 +36,7 @@
                 <td>${product.price}</td>
                 <td>${product.discount}</td>
                 <td>
-                    <a href="/supplier/product?action=edit&id=${product.id}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="#" class="btn btn-warning btn-sm edit-btn" data-id="${product.id}">Edit</a>
                     <a href="/supplier/product?action=delete&id=${product.id}" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
