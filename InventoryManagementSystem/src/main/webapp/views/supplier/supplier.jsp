@@ -86,6 +86,23 @@
     </div>
 </div>
 
+<!-- Modal HTML -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="editModalContent">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -126,6 +143,25 @@
                     });
                 }
             }
+        });
+
+        $(document).on("click", ".edit-btn", function() {
+            const productId = $(this).data("id");
+            console.log("Product ID:", productId);
+
+            const url = "/supplier/product?action=edit-product&id=" + encodeURIComponent(productId);
+
+            $.ajax({
+                url: url,
+                success: function(response) {
+                    $('#editModalContent').html(response);
+                    $('#editModal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", xhr, status, error);
+                    alert("Error loading product details.");
+                }
+            });
         });
     });
 </script>
