@@ -64,7 +64,7 @@ public class AuthController extends HttpServlet {
                 if (isSupplier) {
                     resp.sendRedirect("/supplier");
                 } else {
-                    resp.sendRedirect("/views/retailer/retailer.jsp");
+                    resp.sendRedirect("/retailer");
                 }
             } else {
                 resp.getWriter().write("Invalid login credentials");
