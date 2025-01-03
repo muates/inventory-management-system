@@ -78,11 +78,11 @@
                 case "profileBtn":
                     targetUrl = "/retailer/profile";
                     break;
-                case "ordersBtn":
-                    targetUrl = "/retailer/order";
-                    break;
                 case "cartBtn":
                     targetUrl = "/retailer/cart";
+                    break;
+                case "ordersBtn":
+                    targetUrl = "/retailer/order";
                     break;
                 case "logoutBtn":
                     window.location.href = "/logout";
@@ -94,6 +94,9 @@
                     url: targetUrl,
                     success: function (response) {
                         $('#contentContainer').html(response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX request failed", status, error);
                     }
                 });
             }
