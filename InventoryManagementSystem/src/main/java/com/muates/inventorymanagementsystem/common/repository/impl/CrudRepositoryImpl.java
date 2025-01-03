@@ -125,7 +125,9 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
             }
         }
 
-        return "INSERT INTO " + clazz.getSimpleName() + " (" + columnNames + ") VALUES (" + placeholders + ")";
+        String tableName = toSnakeCase(clazz.getSimpleName());
+
+        return "INSERT INTO " + tableName + " (" + columnNames + ") VALUES (" + placeholders + ")";
     }
 
     private String buildUpdateQuery(TEntity entity) {
@@ -152,8 +154,11 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
             field.setAccessible(true);
             if (!field.getName().equalsIgnoreCase("id")) {
                 Object value = field.get(entity);
+
                 if (value == null) {
                     stmt.setObject(index++, null);
+                } else if (value instanceof Enum) {
+                    stmt.setObject(index++, value.toString(), Types.OTHER);
                 } else {
                     stmt.setObject(index++, value);
                 }
