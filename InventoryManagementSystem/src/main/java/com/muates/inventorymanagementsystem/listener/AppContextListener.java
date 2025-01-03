@@ -11,6 +11,8 @@ import com.muates.inventorymanagementsystem.service.auth.strategy.impl.RetailerA
 import com.muates.inventorymanagementsystem.service.auth.strategy.impl.SupplierAuthStrategy;
 import com.muates.inventorymanagementsystem.service.cart.CartService;
 import com.muates.inventorymanagementsystem.service.cart.impl.CartServiceImpl;
+import com.muates.inventorymanagementsystem.service.order.OrderService;
+import com.muates.inventorymanagementsystem.service.order.impl.OrderServiceImpl;
 import com.muates.inventorymanagementsystem.service.product.ProductService;
 import com.muates.inventorymanagementsystem.service.product.impl.ProductServiceImpl;
 
@@ -50,6 +52,9 @@ public class AppContextListener implements ServletContextListener {
 
             // Cart
             container.register(CartService.class, new CartServiceImpl());
+
+            // Order
+            container.register(OrderService.class, new OrderServiceImpl());
 
         } catch (Exception e) {
             throw new RuntimeException(e);
