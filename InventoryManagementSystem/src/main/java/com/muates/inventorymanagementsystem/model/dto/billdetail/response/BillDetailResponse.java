@@ -11,6 +11,18 @@ public class BillDetailResponse {
     private BigDecimal unitPrice;
     private BigDecimal totalPrice;
 
+    public BillDetailResponse() {
+    }
+
+    public BillDetailResponse(Integer id, Integer billId, Integer productId, Integer quantity, BigDecimal unitPrice, BigDecimal totalPrice) {
+        this.id = id;
+        this.billId = billId;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.totalPrice = totalPrice;
+    }
+
     public Integer getId() {
         return id;
     }
