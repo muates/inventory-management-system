@@ -3,7 +3,7 @@ package com.muates.inventorymanagementsystem.model.entity;
 import com.muates.inventorymanagementsystem.model.enums.BillStatus;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Bill {
@@ -13,19 +13,19 @@ public class Bill {
     private Integer retailerId;
     private BillStatus status;
     private BigDecimal totalAmount;
-    private Date date;
+    private Timestamp date;
 
     public Bill() {
     }
 
-    public Bill(Integer supplierId, Integer retailerId, BillStatus status, Date date) {
+    public Bill(Integer supplierId, Integer retailerId, BillStatus status, Timestamp date) {
         this.supplierId = supplierId;
         this.retailerId = retailerId;
         this.status = status;
         this.date = date;
     }
 
-    public Bill(Integer supplierId, Integer retailerId, BillStatus status, BigDecimal totalAmount, Date date) {
+    public Bill(Integer supplierId, Integer retailerId, BillStatus status, BigDecimal totalAmount, Timestamp date) {
         this.supplierId = supplierId;
         this.retailerId = retailerId;
         this.status = status;
@@ -73,11 +73,11 @@ public class Bill {
         this.totalAmount = totalAmount;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
