@@ -4,7 +4,7 @@ import com.muates.inventorymanagementsystem.model.dto.bill.response.BillResponse
 import com.muates.inventorymanagementsystem.model.entity.Bill;
 import com.muates.inventorymanagementsystem.model.enums.BillStatus;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,11 +34,13 @@ public class BillConverter {
             return null;
         }
 
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
         return new Bill(
                 supplierId,
                 retailerId,
                 BillStatus.PENDING,
-                new Date()
+                timestamp
         );
     }
 }

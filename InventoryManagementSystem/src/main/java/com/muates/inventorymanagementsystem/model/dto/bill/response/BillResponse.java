@@ -3,7 +3,7 @@ package com.muates.inventorymanagementsystem.model.dto.bill.response;
 import com.muates.inventorymanagementsystem.model.enums.BillStatus;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class BillResponse {
 
@@ -12,9 +12,9 @@ public class BillResponse {
     private Integer retailerId;
     private BillStatus status;
     private BigDecimal totalAmount;
-    private Date date;
+    private Timestamp date;
 
-    public BillResponse(Integer id, Integer supplierId, Integer retailerId, BillStatus status, BigDecimal totalAmount, Date date) {
+    public BillResponse(Integer id, Integer supplierId, Integer retailerId, BillStatus status, BigDecimal totalAmount, Timestamp date) {
         this.id = id;
         this.supplierId = supplierId;
         this.retailerId = retailerId;
@@ -63,11 +63,11 @@ public class BillResponse {
         this.totalAmount = totalAmount;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 }
