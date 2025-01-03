@@ -21,7 +21,6 @@
             display: flex;
             justify-content: space-between;
             padding: 0;
-            margin-bottom: 20px;
         }
 
         .nav-pills .nav-item {
