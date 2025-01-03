@@ -39,6 +39,7 @@
                         <input type="hidden" name="productId" value="${product.id}">
                         <input type="hidden" name="productName" value="${product.name}">
                         <input type="hidden" name="unitPrice" value="${product.price}">
+                        <input type="hidden" name="supplierId" value="${product.supplierId}"> <!-- Eklenen hidden input -->
                         <input type="number" name="quantity" value="1" min="1" max="${product.stockQuantity}" required>
                         <button type="submit" class="btn btn-success btn-sm">Add to Cart</button>
                     </form>

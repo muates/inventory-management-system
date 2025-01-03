@@ -19,32 +19,44 @@
         </div>
     </c:if>
 
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Unit Price</th>
-            <th>Total Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="item" items="${cart}">
+    <form action="${pageContext.request.contextPath}/cart/checkout" method="post" id="checkout-form">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
             <tr>
-                <td>${item.productName}</td>
-                <td>${item.quantity}</td>
-                <td>${item.unitPrice}</td>
-                <td>${item.unitPrice * item.quantity}</td>
+                <th>Product Name</th>
+                <th>Product ID</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total Price</th>
+                <th>Actions</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <c:forEach var="item" items="${cart}" varStatus="status">
+                <tr class="cart-item">
+                    <td>${item.productName}</td>
+                    <td>${item.productId}</td>
+                    <td>
+                        <input type="number" class="quantity-input" name="items[${status.index}].quantity" value="${item.quantity}" min="1">
+                    </td>
+                    <td class="unit-price">${item.unitPrice}</td>
+                    <td class="total-price">${item.unitPrice * item.quantity}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger remove-item">Remove</button>
+                    </td>
+                    <input type="hidden" name="items[${status.index}].productId" value="${item.productId}">
+                    <input type="hidden" name="items[${status.index}].supplierId" value="${item.supplierId}">
+                    <input type="hidden" name="items[${status.index}].discount" value="${item.discount}">
+                    <input type="hidden" name="items[${status.index}].unitPrice" value="${item.unitPrice}">
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
 
-    <div class="total-price">
-        <h4>Total: ${totalPrice}</h4>
-    </div>
+        <div class="total-price">
+            <h4>Total: <span id="total-price">${totalPrice}</span></h4>
+        </div>
 
-    <form action="${pageContext.request.contextPath}/checkout" method="post">
         <button type="submit" class="btn btn-primary btn-lg btn-block">Proceed to Checkout</button>
     </form>
 </div>
