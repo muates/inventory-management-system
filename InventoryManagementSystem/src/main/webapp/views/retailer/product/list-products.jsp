@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -25,24 +25,29 @@
             <th>Product Name</th>
             <th>Price</th>
             <th>Quantity</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="product" items="${productList}">
             <tr>
                 <td>${product.name}</td>
-                <td>${product.price}</td> ${product.price.toString()}
+                <td>${product.price}</td>
                 <td>${product.stockQuantity}</td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/retailer/cart" method="post">
+                        <input type="hidden" name="productId" value="${product.id}">
+                        <input type="hidden" name="productName" value="${product.name}">
+                        <input type="hidden" name="unitPrice" value="${product.price}">
+                        <input type="number" name="quantity" value="1" min="1" max="${product.stockQuantity}" required>
+                        <button type="submit" class="btn btn-success btn-sm">Add to Cart</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>
-
