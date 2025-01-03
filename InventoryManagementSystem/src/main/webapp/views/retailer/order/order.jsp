@@ -84,7 +84,7 @@
     </ul>
 
     <!-- Pending Orders Section -->
-    <div class="order-section pending-section active mt-3">
+    <div class="order-section pending-section active">
         <table class="table table-bordered">
             <thead class="thead-light">
             <tr>
@@ -145,7 +145,7 @@
     </div>
 
     <!-- Approved Orders Section -->
-    <div class="order-section approved-section mt-3">
+    <div class="order-section approved-section">
         <table class="table table-bordered">
             <thead class="thead-light">
             <tr>
@@ -206,7 +206,7 @@
     </div>
 
     <!-- Rejected Orders Section -->
-    <div class="order-section rejected-section mt-3">
+    <div class="order-section rejected-section">
         <table class="table table-bordered">
             <thead class="thead-light">
             <tr>
