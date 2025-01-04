@@ -32,7 +32,15 @@ public class DynamicRowMapper {
 
             try {
                 Object value = resultSet.getObject(columnName);
-                field.set(entity, value);
+
+                if (value != null && field.getType().isEnum()) {
+                    @SuppressWarnings("unchecked")
+                    Class<Enum> enumType = (Class<Enum>) field.getType();
+                    Enum<?> enumValue = Enum.valueOf(enumType, value.toString().toUpperCase());
+                    field.set(entity, enumValue);
+                } else {
+                    field.set(entity, value);
+                }
             } catch (SQLException e) {
                 throw new SQLException("Failed to map column '" + columnName + "' to field '" + field.getName() + "'.", e);
             } catch (IllegalAccessException e) {

@@ -44,9 +44,6 @@
                     <button class="btn btn-primary btn-sidebar" id="ordersBtn">Orders</button>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-primary btn-sidebar" id="profileBtn">Profile</button>
-                </li>
-                <li class="nav-item">
                     <button class="btn btn-danger btn-sidebar" id="logoutBtn">Logout</button>
                 </li>
             </ul>
@@ -74,9 +71,6 @@
             switch (actionId) {
                 case "productListBtn":
                     targetUrl = "/retailer/product?action=product-list";
-                    break;
-                case "profileBtn":
-                    targetUrl = "/retailer/profile";
                     break;
                 case "cartBtn":
                     targetUrl = "/retailer/cart";

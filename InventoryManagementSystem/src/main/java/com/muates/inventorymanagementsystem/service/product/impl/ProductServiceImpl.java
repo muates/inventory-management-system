@@ -3,6 +3,8 @@ package com.muates.inventorymanagementsystem.service.product.impl;
 import com.muates.inventorymanagementsystem.common.ioc.Inject;
 import com.muates.inventorymanagementsystem.converter.ProductConverter;
 import com.muates.inventorymanagementsystem.common.mapper.UpdateMapper;
+import com.muates.inventorymanagementsystem.exception.ErrorCode;
+import com.muates.inventorymanagementsystem.exception.handler.GlobalExceptionHandler;
 import com.muates.inventorymanagementsystem.model.dto.product.request.ProductCreateRequest;
 import com.muates.inventorymanagementsystem.model.dto.product.request.ProductUpdateRequest;
 import com.muates.inventorymanagementsystem.model.dto.product.response.ProductResponse;
@@ -31,9 +33,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id);
 
         if (product == null) {
-            // TODO: exception ayarlanacak
-
-            return null;
+            GlobalExceptionHandler.handle(ErrorCode.PRODUCT_NOT_FOUND);
         }
 
         return ProductConverter.toDto(product);
@@ -54,9 +54,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id);
 
         if (product == null) {
-            // TODO: exception ayarlanacak
-
-            return;
+            GlobalExceptionHandler.handle(ErrorCode.PRODUCT_NOT_FOUND);
         }
 
         UpdateMapper.updateFields(request, product);

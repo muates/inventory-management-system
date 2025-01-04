@@ -38,7 +38,8 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
 
     @Override
     public TEntity findById(TID id) {
-        String query = "SELECT * FROM " + getEntityClass().getSimpleName() + " WHERE id = ?";
+        String tableName = toSnakeCase(getEntityClass().getSimpleName());
+        String query = "SELECT * FROM " + tableName + " WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setObject(1, id);
             ResultSet resultSet = stmt.executeQuery();
@@ -174,8 +175,11 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
             field.setAccessible(true);
             if (!field.getName().equalsIgnoreCase("id")) {
                 Object value = field.get(entity);
+
                 if (value == null) {
                     stmt.setObject(index++, null);
+                } else if (value instanceof Enum) {
+                    stmt.setObject(index++, value.toString(), Types.OTHER);
                 } else {
                     stmt.setObject(index++, value);
                 }
@@ -194,10 +198,6 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
             }
         }
         return null;
-    }
-
-    private int getFieldCount(TEntity entity) {
-        return getEntityClass().getDeclaredFields().length;
     }
 
     private void setId(TEntity entity, Object idValue) throws IllegalAccessException {
