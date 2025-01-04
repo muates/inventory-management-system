@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ProductRepository extends BaseRepository<Product, Integer> {
     List<Product> findAllBySupplierId(Integer supplierId);
+    List<Product> findAllByIds(List<Integer> productIds);
 }

@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProductRepositoryImpl extends BaseRepositoryImpl<Product, Integer> implements ProductRepository {
@@ -29,6 +30,33 @@ public class ProductRepositoryImpl extends BaseRepositoryImpl<Product, Integer> 
             stmt.setInt(1, supplierId);
             ResultSet resultSet = stmt.executeQuery();
 
+            while (resultSet.next()) {
+                products.add(mapProduct(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return products;
+    }
+
+    @Override
+    public List<Product> findAllByIds(List<Integer> productIds) {
+        if (productIds == null || productIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<Product> products = new ArrayList<>();
+
+        String placeholders = String.join(",", Collections.nCopies(productIds.size(), "?"));
+        String query = "SELECT * FROM product WHERE id IN (" + placeholders + ") ORDER BY id";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            for (int i = 0; i < productIds.size(); i++) {
+                stmt.setInt(i + 1, productIds.get(i));
+            }
+
+            ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 products.add(mapProduct(resultSet));
             }
