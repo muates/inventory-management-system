@@ -49,7 +49,6 @@
             padding: 5px 10px;
             cursor: pointer;
             border-radius: 5px;
-            margin-top: 5px;
         }
 
         .toggle-detail-btn:hover {
@@ -64,6 +63,15 @@
         .btn-info:hover {
             background-color: #138496;
             border-color: #117a8b;
+        }
+
+        .btn-group {
+            display: flex;
+        }
+
+        .btn-action {
+            flex: 1;
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -94,6 +102,7 @@
                 <th>Total</th>
                 <th>Date</th>
                 <th>Details</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -108,9 +117,15 @@
                         <td>
                             <button class="btn toggle-detail-btn" data-target="#orderDetail-${order.bill.id}">Toggle Details</button>
                         </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-success btn-action" data-id="${order.bill.id}" data-action="approve">Approve</button>
+                                <button class="btn btn-danger btn-action" data-id="${order.bill.id}" data-action="reject">Reject</button>
+                            </div>
+                        </td>
                     </tr>
                     <tr id="orderDetail-${order.bill.id}" class="order-detail">
-                        <td colspan="6">
+                        <td colspan="7">
                             <div class="table-responsive">
                                 <h5>Order Details</h5>
                                 <table class="table table-sm table-striped">
