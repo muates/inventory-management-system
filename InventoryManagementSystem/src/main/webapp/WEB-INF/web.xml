@@ -22,4 +22,14 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+  <filter>
+    <filter-name>RequestResponseFilter</filter-name>
+    <filter-class>com.muates.inventorymanagementsystem.filter.RequestResponseFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>RequestResponseFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
 </web-app>
