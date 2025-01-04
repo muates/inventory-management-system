@@ -298,6 +298,23 @@
             var target = $(this).data("target");
             $(target).toggle();
         });
+
+        $(".btn-action").click(function() {
+            var billId = $(this).data("id");
+            var action = $(this).data("action");
+
+            $.ajax({
+                url: "/supplier/order",
+                method: "POST",
+                data: {
+                    billId: billId,
+                    action: action
+                },
+                success: function() {
+                    location.reload();
+                }
+            });
+        });
     });
 </script>
 </body>
