@@ -64,10 +64,10 @@
                         <button class="btn btn-primary btn-sidebar" id="productListBtn">Product List</button>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-primary btn-sidebar" id="profileBtn">Profile</button>
+                        <button class="btn btn-primary btn-sidebar" id="ordersBtn">Orders</button>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-primary btn-sidebar" id="billStatusBtn">Bill Status</button>
+                        <button class="btn btn-primary btn-sidebar" id="profileBtn">Profile</button>
                     </li>
                     <li class="nav-item">
                         <button class="btn btn-danger btn-sidebar" id="logoutBtn">Logout</button>
@@ -120,11 +120,11 @@
                 case "productListBtn":
                     targetUrl = "/supplier/product?action=product-list";
                     break;
+                case "ordersBtn":
+                    targetUrl = "/supplier/order";
+                    break;
                 case "profileBtn":
                     targetUrl = "/supplier/profile";
-                    break;
-                case "billStatusBtn":
-                    targetUrl = "/supplier/bill-status";
                     break;
                 case "logoutBtn":
                     targetUrl = "/logout";
@@ -158,7 +158,7 @@
                     $('#editModal').modal('show');
                 },
                 error: function(xhr, status, error) {
-                    console.error("AJAX Error:", xhr, status, error);
+                    console.error("AJAX request failed", status, error);
                     alert("Error loading product details.");
                 }
             });
