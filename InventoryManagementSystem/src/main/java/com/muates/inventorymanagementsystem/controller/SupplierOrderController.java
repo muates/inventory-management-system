@@ -37,4 +37,16 @@ public class SupplierOrderController extends HttpServlet {
 
         req.getRequestDispatcher("/views/supplier/order/order.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Integer billId = Integer.valueOf(req.getParameter("billId"));
+        String action = req.getParameter("action");
+
+        if ("approve".equals(action)) {
+            orderService.approveOrder(billId);
+        } else if ("reject".equals(action)) {
+            orderService.rejectOrder(billId);
+        }
+    }
 }
