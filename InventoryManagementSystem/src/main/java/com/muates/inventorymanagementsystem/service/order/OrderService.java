@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OrderService {
     List<OrderResponse> findOrders(Integer userId, boolean isSupplier);
+    void approveOrder(Integer billId);
+    void rejectOrder(Integer billId);
 }
