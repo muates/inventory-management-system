@@ -19,35 +19,30 @@
         </div>
     </c:if>
 
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th>Product Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="row">
         <c:forEach var="product" items="${productList}">
-            <tr>
-                <td>${product.name}</td>
-                <td>${product.price}</td>
-                <td>${product.stockQuantity}</td>
-                <td>
-                    <form action="${pageContext.request.contextPath}/retailer/cart" method="post">
-                        <input type="hidden" name="productId" value="${product.id}">
-                        <input type="hidden" name="productName" value="${product.name}">
-                        <input type="hidden" name="unitPrice" value="${product.price}">
-                        <input type="hidden" name="supplierId" value="${product.supplierId}"> <!-- Eklenen hidden input -->
-                        <input type="number" name="quantity" value="1" min="1" max="${product.stockQuantity}" required>
-                        <button type="submit" class="btn btn-success btn-sm">Add to Cart</button>
-                    </form>
-                </td>
-            </tr>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <c:set var="productImage" value="${not empty product.photos ? product.photos[0].photoUrl : '/assets/images/default-product.jpg'}"/>
+                    <img src="${productImage}" class="card-img-top" alt="Product Image" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.name}</h5>
+                        <p class="card-text">Price: ${product.price}</p>
+                        <p class="card-text">Quantity: ${product.stockQuantity}</p>
+                        <form action="${pageContext.request.contextPath}/retailer/cart" method="post">
+                            <input type="hidden" name="productId" value="${product.id}">
+                            <input type="hidden" name="productName" value="${product.name}">
+                            <input type="hidden" name="unitPrice" value="${product.price}">
+                            <input type="hidden" name="supplierId" value="${product.supplierId}">
+                            <input type="number" name="quantity" value="1" min="1" max="${product.stockQuantity}" required>
+                            <button type="submit" class="btn btn-success btn-sm">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </c:forEach>
-        </tbody>
-    </table>
+    </div>
+
 </div>
 
 </body>
