@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class PostgresDatabaseConnection {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/inventory-management-system";
+    private static final String URL = "jdbc:postgresql://localhost:5432/inventory-management-system?characterEncoding=UTF-8";
     private static final String USER = "user";
     private static final String PASSWORD = "password";
 
