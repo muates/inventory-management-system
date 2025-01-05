@@ -7,6 +7,16 @@ public class ProductPhotoResponse {
     private String photoUrl;
     private Boolean isPrimary;
 
+    public ProductPhotoResponse() {
+    }
+
+    public ProductPhotoResponse(Integer id, Integer productId, String photoUrl, Boolean isPrimary) {
+        this.id = id;
+        this.productId = productId;
+        this.photoUrl = photoUrl;
+        this.isPrimary = isPrimary;
+    }
+
     public Integer getId() {
         return id;
     }

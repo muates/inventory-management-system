@@ -1,6 +1,8 @@
 package com.muates.inventorymanagementsystem.model.dto.product.request;
 
+import javax.servlet.http.Part;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class ProductCreateRequest {
 
@@ -9,6 +11,7 @@ public class ProductCreateRequest {
     private BigDecimal price;
     private BigDecimal discount;
     private Integer supplierId;
+    private List<Part> photos;
 
     public String getName() {
         return name;
@@ -48,5 +51,13 @@ public class ProductCreateRequest {
 
     public void setSupplierId(Integer supplierId) {
         this.supplierId = supplierId;
+    }
+
+    public List<Part> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Part> photos) {
+        this.photos = photos;
     }
 }

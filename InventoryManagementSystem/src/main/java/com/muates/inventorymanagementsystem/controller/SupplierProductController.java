@@ -11,14 +11,22 @@ import com.muates.inventorymanagementsystem.service.product.ProductService;
 import com.muates.inventorymanagementsystem.session.SessionManager;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet("/supplier/product")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 5 * 1024 * 1024,
+        maxRequestSize = 10 * 1024 * 1024
+)
 public class SupplierProductController extends HttpServlet {
 
     @Inject
@@ -71,6 +79,12 @@ public class SupplierProductController extends HttpServlet {
             ProductCreateRequest productCreateRequest =
                     RequestMapper.toRequest(req, ProductCreateRequest.class, RequestParams.PRODUCT_CREATE_REQUEST_PARAMS);
 
+            List<Part> photos = req.getParts().stream()
+                    .filter(part -> "photos".equals(part.getName()))
+                    .collect(Collectors.toList());
+
+            productCreateRequest.setPhotos(photos);
+
             Integer supplierId = SessionManager.getUserId(req);
             productCreateRequest.setSupplierId(supplierId);
 
@@ -85,6 +99,8 @@ public class SupplierProductController extends HttpServlet {
 
             productService.update(productId, productUpdateRequest);
 
+            resp.sendRedirect("/supplier");
+        } else {
             resp.sendRedirect("/supplier");
         }
     }

@@ -14,6 +14,8 @@ import com.muates.inventorymanagementsystem.service.cart.impl.CartServiceImpl;
 import com.muates.inventorymanagementsystem.service.order.OrderService;
 import com.muates.inventorymanagementsystem.service.order.impl.OrderServiceImpl;
 import com.muates.inventorymanagementsystem.service.product.ProductService;
+import com.muates.inventorymanagementsystem.service.product.cloudinary.CloudinaryService;
+import com.muates.inventorymanagementsystem.service.product.cloudinary.impl.CloudinaryServiceImpl;
 import com.muates.inventorymanagementsystem.service.product.impl.ProductServiceImpl;
 
 import javax.servlet.ServletContextEvent;
@@ -49,6 +51,7 @@ public class AppContextListener implements ServletContextListener {
 
             // Product
             container.register(ProductService.class, new ProductServiceImpl());
+            container.register(CloudinaryService.class, new CloudinaryServiceImpl());
 
             // Cart
             container.register(CartService.class, new CartServiceImpl());

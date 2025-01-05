@@ -9,23 +9,58 @@ import com.muates.inventorymanagementsystem.model.dto.product.request.ProductCre
 import com.muates.inventorymanagementsystem.model.dto.product.request.ProductUpdateRequest;
 import com.muates.inventorymanagementsystem.model.dto.product.response.ProductResponse;
 import com.muates.inventorymanagementsystem.model.entity.Product;
+import com.muates.inventorymanagementsystem.model.entity.ProductPhoto;
+import com.muates.inventorymanagementsystem.repository.ProductPhotoRepository;
 import com.muates.inventorymanagementsystem.repository.ProductRepository;
 import com.muates.inventorymanagementsystem.service.product.ProductService;
+import com.muates.inventorymanagementsystem.service.product.cloudinary.CloudinaryService;
 
+import javax.servlet.http.Part;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductServiceImpl implements ProductService {
 
     @Inject
     private ProductRepository productRepository;
 
+    @Inject
+    private ProductPhotoRepository productPhotoRepository;
+
+    @Inject
+    private CloudinaryService cloudinaryService;
+
     @Override
     public ProductResponse save(ProductCreateRequest request) {
         Product product = ProductConverter.toEntity(request);
-
         productRepository.save(product);
 
-        return ProductConverter.toDto(product);
+        List<ProductPhoto> productPhotos = new ArrayList<>();
+        if (request.getPhotos() != null) {
+            for (Part photoPart : request.getPhotos()) {
+                if (photoPart != null && photoPart.getSize() > 0) {
+                    try (InputStream inputStream = photoPart.getInputStream()) {
+                        String url = cloudinaryService.uploadPhoto(inputStream);
+                        ProductPhoto photo = new ProductPhoto(product.getId(), url, false);
+                        productPhotos.add(photo);
+                    } catch (Exception e) {
+                        System.err.println("Photo Upload Error: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            if (!productPhotos.isEmpty()) {
+                productPhotos.get(0).setPrimary(true);
+                productPhotoRepository.saveAll(productPhotos);
+            }
+        }
+
+        return ProductConverter.toDto(product, productPhotos);
     }
 
     @Override
@@ -36,17 +71,27 @@ public class ProductServiceImpl implements ProductService {
             GlobalExceptionHandler.handle(ErrorCode.PRODUCT_NOT_FOUND);
         }
 
-        return ProductConverter.toDto(product);
+        List<ProductPhoto> photos = productPhotoRepository.findAllByProductId(product.getId());
+
+        return ProductConverter.toDto(product, photos);
     }
 
     @Override
     public List<ProductResponse> findAll() {
-        return ProductConverter.toDto(productRepository.findAll());
+        List<Product> existProducts = productRepository.findAll();
+
+        Map<Product, List<ProductPhoto>> productPhotosMap = mapProducts(existProducts);
+
+        return ProductConverter.toDto(productPhotosMap);
     }
 
     @Override
     public List<ProductResponse> findAllBySupplierId(Integer supplierId) {
-        return ProductConverter.toDto(productRepository.findAllBySupplierId(supplierId));
+        List<Product> existProducts = productRepository.findAllBySupplierId(supplierId);
+
+        Map<Product, List<ProductPhoto>> productPhotosMap = mapProducts(existProducts);
+
+        return ProductConverter.toDto(productPhotosMap);
     }
 
     @Override
@@ -65,5 +110,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteById(Integer id) {
         productRepository.delete(id);
+    }
+
+    private Map<Product, List<ProductPhoto>> mapProducts(List<Product> existProducts) {
+        Map<Product, List<ProductPhoto>> productPhotosMap = new HashMap<>();
+
+        if (!existProducts.isEmpty()) {
+            for (Product product : existProducts) {
+                List<ProductPhoto> photos = productPhotoRepository.findAllByProductId(product.getId());
+                productPhotosMap.put(product, photos);
+            }
+        }
+
+        return productPhotosMap;
     }
 }
