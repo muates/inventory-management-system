@@ -38,3 +38,7 @@ out/
 **/.DS_Store
 
 target/
+
+### .env files ###
+.env
+.env.*
