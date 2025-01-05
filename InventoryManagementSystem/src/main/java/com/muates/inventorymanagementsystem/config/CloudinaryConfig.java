@@ -8,7 +8,7 @@ public class CloudinaryConfig {
     private static final Cloudinary cloudinary;
 
     static {
-        Dotenv dotenv = Dotenv.configure().directory("C:\\Users\\W10\\Desktop\\Projects\\java\\inventory-management-system\\InventoryManagementSystem\\.env").load();
+        Dotenv dotenv = Dotenv.configure().directory(".env").load();
         String cloudinaryUrl = dotenv.get("CLOUDINARY_URL");
 
         cloudinary = new Cloudinary(cloudinaryUrl);
