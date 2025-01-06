@@ -86,6 +86,9 @@ public class OrderServiceImpl implements OrderService {
                     if (billDetail.getQuantity() > product.getStockQuantity()) {
                         GlobalExceptionHandler.handle(ErrorCode.PRODUCT_OUT_OF_STOCK);
                     }
+
+                    product.setStockQuantity(product.getStockQuantity() - billDetail.getQuantity());
+                    productRepository.update(product);
                 } else {
                     GlobalExceptionHandler.handle(ErrorCode.PRODUCT_NOT_FOUND);
                 }
