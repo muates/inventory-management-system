@@ -143,7 +143,7 @@ public class CrudRepositoryImpl<TEntity, TID> implements CrudRepository<TEntity,
             }
         }
 
-        updateFields.setLength(updateFields.length() - 2); // Remove the last comma
+        updateFields.setLength(updateFields.length() - 2);
         return "UPDATE " + clazz.getSimpleName() + " SET " + updateFields + " WHERE id = ?";
     }
 
