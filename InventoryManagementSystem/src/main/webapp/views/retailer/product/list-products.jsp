@@ -61,7 +61,7 @@
 
     <div class="row">
         <c:forEach var="product" items="${productList}">
-            <div class="col-md-4 col-lg-3 mb-4 d-flex">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-4 d-flex">
                 <div class="card flex-fill">
                     <c:set var="productImage" value="${not empty product.photos ? product.photos[0].photoUrl : '/assets/images/default-product.jpg'}"/>
                     <img src="${productImage}" class="card-img-top" alt="Product Image">
