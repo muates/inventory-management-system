@@ -8,6 +8,16 @@
     <title>My Orders</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
         .order-detail {
             display: none;
         }
@@ -73,11 +83,29 @@
             flex: 1;
             white-space: nowrap;
         }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-header h2 {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .form-header p {
+            color: #6c757d;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
-<div class="container mt-4">
-    <h3 class="text-center mb-4">Orders</h3>
+<div class="container mt-5">
+    <div class="form-header">
+        <h2>Orders</h2>
+        <p>View and manage all your orders here.</p>
+    </div>
 
     <ul class="nav nav-pills">
         <li class="nav-item">
@@ -96,7 +124,7 @@
         <table class="table table-bordered">
             <thead class="thead-light">
             <tr>
-                <th>Order ID</th>
+                <th>Order</th>
                 <th>Supplier</th>
                 <th>Status</th>
                 <th>Total</th>
@@ -115,7 +143,7 @@
                         <td>${order.bill.totalAmount}</td>
                         <td>${order.bill.date}</td>
                         <td>
-                            <button class="btn toggle-detail-btn" data-target="#orderDetail-${order.bill.id}">Toggle Details</button>
+                            <button class="btn toggle-detail-btn" data-target="#orderDetail-${order.bill.id}">Order Details</button>
                         </td>
                         <td>
                             <div class="btn-group" role="group">
@@ -164,7 +192,7 @@
         <table class="table table-bordered">
             <thead class="thead-light">
             <tr>
-                <th>Order ID</th>
+                <th>Order</th>
                 <th>Supplier</th>
                 <th>Status</th>
                 <th>Total</th>
@@ -182,7 +210,7 @@
                         <td>${order.bill.totalAmount}</td>
                         <td>${order.bill.date}</td>
                         <td>
-                            <button class="btn toggle-detail-btn" data-target="#orderDetail-${order.bill.id}">Toggle Details</button>
+                            <button class="btn toggle-detail-btn" data-target="#orderDetail-${order.bill.id}">Order Details</button>
                         </td>
                     </tr>
                     <tr id="orderDetail-${order.bill.id}" class="order-detail">
@@ -225,7 +253,7 @@
         <table class="table table-bordered">
             <thead class="thead-light">
             <tr>
-                <th>Order ID</th>
+                <th>Order</th>
                 <th>Supplier</th>
                 <th>Status</th>
                 <th>Total</th>
@@ -243,7 +271,7 @@
                         <td>${order.bill.totalAmount}</td>
                         <td>${order.bill.date}</td>
                         <td>
-                            <button class="btn toggle-detail-btn" data-target="#orderDetail-${order.bill.id}">Toggle Details</button>
+                            <button class="btn toggle-detail-btn" data-target="#orderDetail-${order.bill.id}">Order Details</button>
                         </td>
                     </tr>
                     <tr id="orderDetail-${order.bill.id}" class="order-detail">
