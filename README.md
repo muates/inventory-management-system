@@ -2,7 +2,7 @@
 
 ## Auth
 
-![auth-login.PNG](..%2F..%2F..%2Fims%2Fauth-login.PNG)
+![Auth Login](assets/images/auth-login.PNG)
 
 ---
 
@@ -10,19 +10,19 @@
 
 ### Supplier - Add Product
 
-![Supplier Add Product](../..%2F..%2Fims%2Fsupplier-add-product.PNG)
+![Supplier Add Product](assets/images/supplier-add-product.PNG)
 
 ### Supplier - Order
 
-![Supplier Order](../..%2F..%2Fims%2Fsupplier-order.PNG)
+![Supplier Order](assets/images/supplier-order.PNG)
 
 ### Supplier - Product List
 
-![Supplier Product List](../..%2F..%2Fims%2Fsupplier-product-list.PNG)
+![Supplier Product List](assets/images/supplier-product-list.PNG)
 
 ### Supplier - Edit Product
 
-![Supplier Product List Edit](../..%2F..%2Fims%2Fsupplier-product-list-edit.PNG)
+![Supplier Product List Edit](assets/images/supplier-product-list-edit.PNG)
 
 ---
 
@@ -30,14 +30,14 @@
 
 ### Retailer - Product List
 
-![Retailer Product List](../..%2F..%2Fims%2Fretailer-product-list.PNG)
+![Retailer Product List](assets/images/retailer-product-list.PNG)
 
 ### Retailer - Cart
 
-![Retailer Cart](../..%2F..%2Fims%2Fretailer-cart.PNG)
+![Retailer Cart](assets/images/retailer-cart.PNG)
 
 ### Retailer - Order
 
-![Retailer Orders](../..%2F..%2Fims%2Fretailer-orders.PNG)
+![Retailer Orders](assets/images/retailer-orders.PNG)
 
 ---
